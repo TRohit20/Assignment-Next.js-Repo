@@ -23,14 +23,11 @@ jobs:
         run: npm install
         working-directory: frontend
 
-      - name: Create Directory for Unity Build
-        run: |
-          mkdir -p frontend/public/build
-          ls frontend/public
-          ls frontend/public/build
-
       - name: Copy Unity Build
         run: |
+          # Create the frontend/public/build directory if it doesn't exist
+          mkdir -p frontend/public/build
+
           # Copy Unity build files from Unity repository to frontend/public/build folder in Next.js repository
           git clone https://github.com/TRohit20/Assignment-Unity-Repo.git tmp-unity-repo
           cp -r tmp-unity-repo/Hello\ World/build/* frontend/public/build
