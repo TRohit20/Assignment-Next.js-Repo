@@ -17,17 +17,19 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: 18.9.0
+          node-version: 14.x
 
       - name: Install Dependencies
         run: npm install
         working-directory: frontend
 
+      - name: Create Directory for Unity Build
+        run: mkdir -p frontend/public/build
+
       - name: Copy Unity Build
         run: |
           # Copy Unity build files from Unity repository to frontend/public/build folder in Next.js repository
           git clone https://github.com/TRohit20/Assignment-Unity-Repo.git tmp-unity-repo
-          mkdir -p public/build
           cp -r tmp-unity-repo/Hello\ World/build/* frontend/public/build
           rm -rf tmp-unity-repo
         working-directory: frontend
