@@ -24,7 +24,10 @@ jobs:
         working-directory: frontend
 
       - name: Create Directory for Unity Build
-        run: mkdir -p frontend/public/build
+        run: |
+          mkdir -p frontend/public/build
+          ls frontend/public
+          ls frontend/public/build
 
       - name: Copy Unity Build
         run: |
