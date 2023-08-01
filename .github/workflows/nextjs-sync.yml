@@ -35,7 +35,7 @@ jobs:
         working-directory: frontend
 
       - name: Build Next.js
-        run: npm run build
+        run: next build
         working-directory: frontend
 
       - name: Commit Unity Changes to Next.js Repo
