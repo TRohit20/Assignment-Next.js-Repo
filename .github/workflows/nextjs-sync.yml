@@ -27,6 +27,7 @@ jobs:
         run: |
           # Copy Unity build files from Unity repository to frontend/public/build folder in Next.js repository
           git clone https://github.com/TRohit20/Assignment-Unity-Repo.git tmp-unity-repo
+          mkdir -p public/build
           cp -r tmp-unity-repo/Hello\ World/build/* frontend/public/build
           rm -rf tmp-unity-repo
         working-directory: frontend
