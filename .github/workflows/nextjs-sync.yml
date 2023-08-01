@@ -34,10 +34,6 @@ jobs:
           rm -rf tmp-unity-repo
         working-directory: frontend
 
-      - name: Build Next.js
-        run: next build
-        working-directory: frontend
-
       - name: Commit Unity Changes to Next.js Repo
         run: |
           # Commit and push changes to Next.js repository
