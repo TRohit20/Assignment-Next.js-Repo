@@ -19,14 +19,17 @@ jobs:
         with:
           node-version: 18.9.0
 
+      - name: Change Directory to Frontend
+        run: cd frontend
+
       - name: Install Dependencies
         run: npm install
 
       - name: Copy Unity Build
         run: |
-          # Copy Unity build files from Unity repository to public/build folder in Next.js repository
+          # Copy Unity build files from Unity repository to frontend/public/build folder in Next.js repository
           git clone https://github.com/TRohit20/Assignment-Unity-Repo.git tmp-unity-repo
-          cp -r tmp-unity-repo/Hello\ World/build/* frontend/public/build
+          cp -r tmp-unity-repo/Hello\ World/build/* public/build
           rm -rf tmp-unity-repo
 
       - name: Build Next.js
