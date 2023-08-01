@@ -7,39 +7,32 @@ on:
 
 jobs:
   build:
-    name: Build Next.js Project and Sync from Unity
+    name: Sync Unity Build to Next.js Public Folder
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
+      - name: Checkout Unity Repository
         uses: actions/checkout@v2
-
-      - name: Install Node.js
-        uses: actions/setup-node@v2
         with:
-          node-version: 14.x
+          repository: TRohit20/Assignment-Unity-Repo
+          path: unity-repo
 
-      - name: Install Dependencies
-        run: npm install
-        working-directory: frontend
+      - name: Create Directory for Unity Build
+        run: mkdir -p frontend/public/build
 
       - name: Copy Unity Build
-        run: |
-          # Create the frontend/public/build directory if it doesn't exist
-          mkdir -p frontend/public/build
+        run: cp -r unity-repo/Hello\ World/build/* frontend/public/build
 
-          # Copy Unity build files from Unity repository to frontend/public/build folder in Next.js repository
-          git clone https://github.com/TRohit20/Assignment-Unity-Repo.git tmp-unity-repo
-          cp -r tmp-unity-repo/Hello\ World/build/* frontend/public/build
-          rm -rf tmp-unity-repo
-        working-directory: frontend
+      - name: Configure Git
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
 
       - name: Commit Unity Changes to Next.js Repo
         run: |
-          # Commit and push changes to Next.js repository
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "actions@github.com"
+          cd frontend
           git add .
           git commit -m "Sync Unity build to Next.js public folder"
-          git push
-        working-directory: frontend
+          git push https://github.com/TRohit20/Assignment-Next.js-Repo.git HEAD:main
+        env:
+          GH_PAT: ${{ secrets.PAT_TOKEN }}
